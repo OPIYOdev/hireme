@@ -6,5 +6,9 @@ export default async function handler(req, res) {
     const { role = "", elig = "open", days = "120" } = req.query || {};
     res.setHeader("Cache-Control", "public, s-maxage=900, stale-while-revalidate=3600");
     res.status(200).json(await trends(sql, { role, elig, days }));
-  } catch (e) { res.status(500).json({ error: String(e.message).slice(0, 120) }); }
+    } catch (e) {
+    const msg = String(e.message);
+    if (/does not exist/.test(msg)) { res.setHeader("Cache-Control", "no-store"); return res.status(200).json({ days: [], total: [], fresh: [], versions: [], series: {}, sourceDays: [] }); }
+    res.status(500).json({ error: msg.slice(0, 120) });
+  }
 }
