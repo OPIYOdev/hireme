@@ -1,0 +1,24 @@
+:root{--bg:#f1f4ef;--ink:#12261f;--mute:#5a6b63;--line:#d3dcd4;--card:#fbfcfa;--g:#0b6e4f;--gl:#dcefe5;--r:#b3261e;--rl:#f7e1df;--a:#8a5d00;--al:#f6ecd0}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1a16;--ink:#e6efe9;--mute:#9bb0a5;--line:#263830;--card:#15241e;--g:#4fd0a0;--gl:#16382b;--r:#ff8a80;--rl:#3a1d1b;--a:#e7b84a;--al:#3a2f12}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;margin:0 0 .5rem;line-height:1.15}h1{font-size:2.1rem}h2{font-size:1.3rem}h3{font-size:1rem;margin-top:1.2rem}
+header{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-end;padding:1.5rem clamp(1rem,4vw,3rem);border-bottom:1px solid var(--line)}
+.sub,.hint{color:var(--mute);margin:.2rem 0;font-size:.92rem;font-weight:400}.meta{display:flex;gap:.7rem;align-items:center;font-size:.9rem;color:var(--mute)}
+main{max-width:1100px;margin:0 auto;padding:1rem clamp(1rem,4vw,2rem)}section{margin:2rem 0}
+button,select,input[type=search]{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.4rem .7rem}button{cursor:pointer}button:hover{border-color:var(--g)}
+:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+.prompts{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.prompt{background:var(--card);border-left:4px solid var(--g);padding:.8rem 1rem;border-radius:0 8px 8px 0}.prompt.warn{border-color:var(--a)}.prompt b{display:block;margin-bottom:.2rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}.chip{border-radius:99px;padding:.2rem .75rem;font-size:.88rem;border:1px solid var(--line);background:var(--card);cursor:pointer}.chip.on{background:var(--gl);border-color:var(--g);color:var(--g)}
+.two{display:grid;gap:2rem;grid-template-columns:2fr 1fr}@media(max-width:760px){.two{grid-template-columns:1fr}}
+.bar{display:grid;grid-template-columns:150px 1fr 3.2rem;gap:.6rem;align-items:center;font-size:.9rem;margin:.28rem 0}.bar i{display:block;height:.7rem;border-radius:4px;background:var(--r);opacity:.75}.bar.have i{background:var(--g);opacity:1}.bar span:last-child{color:var(--mute);text-align:right}
+.mixrow{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:.25rem 0;font-size:.92rem}
+.filters{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.chk{font-size:.9rem;display:flex;gap:.3rem;align-items:center}
+.jobs{list-style:none;padding:0;margin:.6rem 0;display:grid;gap:.6rem}
+.job{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.8rem 1rem;display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem}
+.job a{color:var(--ink);font-weight:500;text-decoration:none;font-size:1.02rem}.job a:hover{text-decoration:underline}.job small{color:var(--mute)}
+.score{font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem;color:var(--g);text-align:right}.score small{display:block;font-family:"IBM Plex Sans";font-size:.72rem}
+.tag{display:inline-block;font-size:.78rem;padding:0 .5rem;border-radius:4px;margin:.15rem .25rem .15rem 0;background:var(--gl);color:var(--g)}.tag.miss{background:var(--rl);color:var(--r)}.tag.e-restricted{background:var(--al);color:var(--a)}.tag.new{background:var(--g);color:var(--bg)}
+.vgrid{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.v{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.7rem .9rem;font-size:.9rem}.v b{display:block;font-size:1.05rem}.v a{color:var(--mute)}
+.base li{margin:.3rem 0;font-size:.92rem}footer{padding:1.5rem clamp(1rem,4vw,3rem);border-top:1px solid var(--line);color:var(--mute);font-size:.85rem}footer a{color:var(--mute)}
+.srow{display:grid;grid-template-columns:170px 170px 3rem 7rem;gap:.6rem;align-items:center;font-size:.9rem;border-bottom:1px solid var(--line);padding:.25rem 0;color:var(--r)}.srow.have{color:var(--g)}.srow span,.srow b{color:var(--ink)}.srow small{color:var(--mute)}@media(max-width:620px){.srow{grid-template-columns:1fr 100px 3rem}.srow small{display:none}}

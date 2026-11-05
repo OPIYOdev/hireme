@@ -1,0 +1,2 @@
+{ "functions": { "api/jobs.js": { "maxDuration": 30 }, "api/ingest.js": { "maxDuration": 60 } },
+  "crons": [{ "path": "/api/ingest", "schedule": "0 4 * * *" }] }

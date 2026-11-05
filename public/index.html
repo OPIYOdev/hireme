@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kenya Hiring Pulse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header><div><h1>Kenya Hiring Pulse</h1><p class="sub">Live remote-engineering listings you can actually apply to from Kenya, and the skills they ask for.</p></div>
+<div class="meta"><span id="updated">Loading…</span><button id="refresh">Refresh now</button></div></header>
+<main>
+<section id="actions" aria-live="polite"><h2>Your next moves</h2><div id="prompts" class="prompts"></div></section>
+<section><h2>Your skills</h2><p class="hint">Click to toggle what you already have. Saved in this browser.</p><div id="myskills" class="chips"></div></section>
+<section class="two"><div><h2>Skills in demand <span id="demandScope" class="hint"></span></h2><div id="demand"></div></div>
+<div><h2>What the feed looks like</h2><div id="mix"></div></div></section>
+<section><h2>Open roles</h2>
+<div class="filters"><select id="fElig"><option value="open">Kenya, Africa or worldwide</option><option value="kenya">Kenya / East Africa only</option><option value="all">Everything (incl. restricted)</option></select>
+<select id="fRole"></select><select id="fSen"></select><input id="fQ" type="search" placeholder="Search title, company or skill"><label class="chk"><input id="fNew" type="checkbox"> New since last visit</label></div>
+<p id="count" class="hint"></p><ul id="jobs" class="jobs"></ul></section>
+<section><h2>Skill trends <span id="trendNote" class="hint"></span></h2><div id="trends"></div></section>
+<section class="base"><h2>Verified baseline <span class="hint">checked <span id="chk"></span></span></h2><div id="verified" class="vgrid"></div>
+<h3>Read these limits first</h3><ul id="caveats"></ul></section>
+</main>
+<footer><p>Listings come from public job-board APIs and are refreshed at most every 6 hours, because some sources cap requests. Source health: <span id="srcs"></span></p>
+<p>Classification (eligibility, role, seniority, skills) is keyword-based and can be wrong: open the posting before acting.</p></footer>
+<script src="app.js" type="module"></script></body></html>

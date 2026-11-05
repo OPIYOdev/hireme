@@ -1,0 +1,27 @@
+// Needs: npm i --no-save @electric-sql/pglite  (an in-process Postgres, used only for testing)
+import { PGlite } from "@electric-sql/pglite"; import assert from "node:assert/strict";
+import { SCHEMA, upsertListings, logSources, rollup, prune, recentJobs, trends, canonKey } from "../lib/store.js";
+const pg = new PGlite(), sql = { query: async (t, p = []) => (await pg.query(t, p)).rows };
+for (const s of SCHEMA) await sql.query(s);
+const J = (o = {}) => ({ id: "x", source: "remotive", title: "Senior Python Engineer", company: "Acme", url: "https://a.co/1", date: new Date().toISOString(), salary: "", role: "Backend", seniority: "Senior", eligibility: "worldwide", eligibilityLabel: "Worldwide", skills: ["Python", "Docker"], extractorVersion: 1, ...o });
+const batch = [J(), J({ source: "remoteok", url: "https://a.co/2" }), J({ title: "Senior Python Engineer (Remote)", source: "jobicy" }), J({ title: "AI Engineer", company: "Beta", skills: ["LLMs", "Python"], role: "AI / LLM engineer", eligibility: "kenya" })];
+assert.equal(canonKey("Acme", "Senior Python Engineer (Remote)"), canonKey("ACME ", "senior python engineer"));
+let r = await upsertListings(sql, batch); assert.deepEqual([r.distinct, r.inserted, r.updated], [2, 2, 0], "cross-source dupes merge");
+assert.deepEqual((await sql.query("SELECT sources FROM listings WHERE company='Acme'"))[0].sources.sort(), ["jobicy", "remoteok", "remotive"]);
+r = await upsertListings(sql, batch); assert.equal(r.inserted, 0, "re-run inserts nothing");
+assert.equal((await sql.query("SELECT seen_count FROM listings WHERE company='Acme'"))[0].seen_count, 1, "same-day re-run does not inflate seen_count");
+await sql.query("UPDATE listings SET last_seen = CURRENT_DATE - 1"); await upsertListings(sql, batch);
+assert.equal((await sql.query("SELECT seen_count FROM listings WHERE company='Acme'"))[0].seen_count, 2, "next day increments");
+await sql.query("UPDATE listings SET last_seen = CURRENT_DATE - 70 WHERE company='Acme'"); await upsertListings(sql, batch);
+const re = (await sql.query("SELECT seen_count, first_seen = CURRENT_DATE AS fresh FROM listings WHERE company='Acme'"))[0]; assert.deepEqual([re.seen_count, re.fresh], [1, true], "reposted after 60+ days counts as new");
+assert.equal((await sql.query("SELECT count(*)::int c FROM listings"))[0].c, 2);
+await logSources(sql, { remotive: { ok: true, count: 3 }, jobicy: { ok: false, count: 0, error: "HTTP 429" } });
+await rollup(sql, 1); await rollup(sql, 1);
+assert.equal((await sql.query("SELECT sum(total)::int t FROM listing_daily"))[0].t, 2, "rollup is idempotent");
+let t = await trends(sql, { elig: "open" }); assert.equal(t.total[0], 2); assert.equal(t.series.Python[0], 2); assert.equal(t.series.LLMs[0], 1);
+t = await trends(sql, { elig: "kenya" }); assert.equal(t.total[0], 1); assert.equal(t.series.Python[0], 1);
+t = await trends(sql, { role: "Backend" }); assert.equal(t.total[0], 1);
+const rj = await recentJobs(sql); assert.equal(rj.jobs.length, 2); assert.equal(rj.status.jobicy.ok, false); assert.ok(Array.isArray(rj.jobs[0].skills));
+await sql.query("UPDATE listings SET last_seen = CURRENT_DATE - 200 WHERE company='Beta'"); assert.equal(await prune(sql, 120), 1);
+assert.equal((await sql.query("SELECT count(*)::int c FROM skill_daily"))[0].c > 0, true, "aggregates survive pruning");
+console.log("all store tests passed");

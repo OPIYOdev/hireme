@@ -1,0 +1,17 @@
+{ "checked": "2026-11-02",
+  "verified": [
+    {"label":"US software developers employed (2025)","value":"1,717,800","src":"BLS OOH, SOC 15-1252","url":"https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm"},
+    {"label":"Projected growth 2025-35","value":"10% (+174,700 jobs)","src":"BLS OOH","url":"https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm"},
+    {"label":"Median wage, May 2025","value":"$135,980 (p10 $82,460, p90 $214,670)","src":"BLS OOH","url":"https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm"},
+    {"label":"Research scientists: jobs / growth / median","value":"38,600 / 22% (+8,400) / $140,300","src":"BLS OOH, SOC 15-1221","url":"https://www.bls.gov/ooh/computer-and-information-technology/computer-and-information-research-scientists.htm"},
+    {"label":"2024 hiring activity: lead / senior / junior / entry","value":"+22% / +19% / +9% / +7%","src":"HackerRank 2025 report (own platform data)","url":"https://www.hackerrank.com/reports/developer-skills-report-2025"},
+    {"label":"Entry-level hiring by region (2024)","value":"EMEA +37%, APAC +26%, Americas -6%","src":"HackerRank blog","url":"https://www.hackerrank.com/blog/senior-hiring-is-surging-will-early-career-talent-catch-up/"},
+    {"label":"Cloud and ML hiring, senior / lead (2024)","value":"+68% / +53%","src":"HackerRank blog","url":"https://www.hackerrank.com/blog/senior-hiring-is-surging-will-early-career-talent-catch-up/"}
+  ],
+  "caveats": [
+    "BLS figures are US occupations, not Kenya, and not backend-only.",
+    "BLS wage percentiles are not junior/mid/senior bands and not offers for Kenya-based remote workers.",
+    "BLS lists developers (1,717,800) separately from developers plus QA/testers (1,905,400; 106,100 openings a year including replacements). Do not mix the two.",
+    "HackerRank measures test invites on its own platform: a direction signal, not hiring volume.",
+    "Vendor totals (240,303 backend postings, 18,482 weekly, 99,173 Python) were not independently verifiable and stay withdrawn. This site counts only what its own live feeds return."
+  ] }
